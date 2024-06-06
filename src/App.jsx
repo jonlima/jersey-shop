@@ -1,4 +1,5 @@
 import './App.css';
+import OrderDetails from './components/OrderDetails';
 
 function App() {
 
@@ -11,7 +12,7 @@ function App() {
             price: 119.99,
             active: false,
             quantity: 1, 
-            isInBag: true
+            isInBag: false
         },
         {
             id: 2, 
@@ -86,6 +87,8 @@ function App() {
         }
     ];
 
+    const itemsInBag = items.filter(item => item.isInBag);
+
     return ( 
         <>
             <section className="items">
@@ -113,31 +116,8 @@ function App() {
                     </div>
                 ) }
             </section>
-            
 
-            <section className="summary">
-                <strong>Order Details</strong>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1x Real Madrid</td>
-                            <td>$ 119.99</td>
-                        </tr>
-                        
-                        <tr>
-                            <th>Total</th>
-                            <th>$ 119.99</th>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
-            
+            { itemsInBag.length > 0 && <OrderDetails />}            
         </>
     );
 }
