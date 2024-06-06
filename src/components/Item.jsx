@@ -1,4 +1,4 @@
-function Item ({ item, selectProduct }) {
+function Item ({ item, selectProduct, changeQuantity }) {
     return (
         <>
             <div onClick={() => selectProduct(item.id)} className={`product ${ item.isInBag ? 'selected' : '' }`}>
@@ -12,9 +12,9 @@ function Item ({ item, selectProduct }) {
                     {
                         item.isInBag &&
                         <div className="quantity-area">
-                            <button>-</button>
-                            <span className="quantity">1</span>
-                            <button>+</button>
+                            <button disabled={item.quantity<=1} onClick={(e) => changeQuantity(e, item.id, -1)}>-</button>
+                            <span className="quantity">{item.quantity}</span>
+                            <button onClick={(e) => changeQuantity(e, item.id, +1)}>+</button>
                         </div>
                     }
                     

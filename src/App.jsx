@@ -99,6 +99,13 @@ function App() {
         setItems(items.map(item => item.id === id ? selectedItem : item));
     }
 
+    function quantityHandler (e, id, increment) {
+        e.stopPropagation();
+        let selectedItem = items.filter(item => item.id === id)[0];
+        selectedItem.quantity += increment;
+        setItems(items.map(item => item.id === id ? selectedItem : item));
+    }
+
     return ( 
         <>
             <section className="items">
@@ -107,13 +114,14 @@ function App() {
                 { items.map(item => 
                     <Item 
                         selectProduct={(id) => selectHandler(id)}
+                        changeQuantity={(e, id, increment) => quantityHandler(e, id, increment)}
                         key={item.id} 
                         item={item} 
                     />
                 ) }
             </section>
 
-            { itemsInBag.length > 0 && <OrderDetails />}            
+            { itemsInBag.length > 0 && <OrderDetails itemsInBag={itemsInBag}/>}            
         </>
     );
 }
